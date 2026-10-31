@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indian Basketball Pro League</title>
+  <meta name="description" content="The Indian Basketball Pro League — eight city franchises, one title. Fixtures, teams, statistics, registrations and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Big+Shoulders+Display:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js", "is-loading")</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F2801F'/%3E%3Cpath d='M2 32h60M32 2v60M11 11c12 10 12 32 0 42M53 11c-12 10-12 32 0 42' stroke='%23151A3D' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+</head>
+<body>
+  <!-- loading screen: a shot clock runs down while the page loads -->
+  <div class="loader" id="loader" role="status" aria-live="polite">
+    <span class="sr-only" id="loaderStatus">Loading the Indian Basketball Pro League</span>
+    <div class="loader__inner" aria-hidden="true">
+      <div class="shotclock" id="shotclock">
+        <span class="shotclock__num" id="shotclockNum">24</span>
+        <span class="shotclock__bar"><span id="shotclockBar"></span></span>
+      </div>
+      <div class="loader__stage">
+        <div class="dribble">
+          <svg class="dribble__ball" viewBox="-30 -30 60 60">
+            <circle r="27" fill="#F2801F"/>
+            <g fill="none" stroke="#3B1A06" stroke-width="2.4" stroke-linecap="round">
+              <path d="M-27 0h54M0 -27v54"/>
+              <path d="M-19 -19c8 8 8 30 0 38M19 -19c-8 8 -8 30 0 38"/>
+            </g>
+          </svg>
+        </div>
+        <span class="dribble__shadow"></span>
+        <div class="loader__floor"></div>
+      </div>
+      <p class="loader__brand">Indian Basketball Pro League</p>
+      <p class="loader__hint" id="loaderHint">Warming up</p>
+    </div>
+  </div>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="IBPL home">
+      <svg class="brand__ball" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" /><path d="M3 32h58M32 3v58M12 11c11 10 11 32 0 42M52 11c-11 10-11 32 0 42"/></svg>
+      <span class="brand__text">IBPL</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#teams">Teams</a></li>
+        <li><a href="#fixtures">Fixtures</a></li>
+        <li><a href="#statistics">Statistics</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact us</a></li>
+        <li class="nav__cta-mobile"><a href="#registrations" class="btn btn--ball">Register</a></li>
+      </ul>
+    </nav>
+    <a href="#registrations" class="btn btn--ball nav__cta">Register</a>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="hero__lights" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <p class="hero__season reveal-line"><span class="dot"></span> Season 3 · tip-off 12 December 2026</p>
+          <h1 class="hero__title" id="heroTitle">
+            <span class="line"><span>Indian</span></span>
+            <span class="line"><span>Basketball</span></span>
+            <span class="line line--pro"><span>Pro League</span></span>
+          </h1>
+          <p class="hero__lede reveal-line">Eight cities. Eighty players. One trophy.<span class="lede-more"> India's professional basketball league is back on the hardwood — and open trials start now.</span></p>
+          <div class="hero__actions reveal-line">
+            <a href="#registrations" class="btn btn--ball btn--lg">Register for trials</a>
+            <a href="#fixtures" class="btn btn--ghost btn--lg">See fixtures</a>
+          </div>
+
+          <div class="countdown reveal-line" aria-label="Countdown to tip-off">
+            <div class="countdown__cell"><span class="countdown__num" id="cdD">00</span><span class="countdown__lbl">days</span></div>
+            <div class="countdown__cell"><span class="countdown__num" id="cdH">00</span><span class="countdown__lbl">hours</span></div>
+            <div class="countdown__cell"><span class="countdown__num" id="cdM">00</span><span class="countdown__lbl">mins</span></div>
+            <div class="countdown__cell"><span class="countdown__num" id="cdS">00</span><span class="countdown__lbl">secs</span></div>
+          </div>
+        </div>
+
+        <div class="hero__court">
+          <div class="scoreboard" aria-live="polite">
+            <div class="scoreboard__team"><span class="scoreboard__name">You</span><span class="scoreboard__pts" id="scoreYou">0</span></div>
+            <div class="scoreboard__mid">
+              <span class="scoreboard__qtr">Q1</span>
+              <span class="scoreboard__msg" id="scoreMsg">Warm-up</span>
+            </div>
+            <div class="scoreboard__team"><span class="scoreboard__name">Rim</span><span class="scoreboard__pts" id="scoreRim">0</span></div>
+          </div>
+
+          <svg class="hoop" id="hoop" viewBox="0 0 600 700" role="img" aria-label="Animated basketball shot into a hoop">
+            <defs>
+              <radialGradient id="ballGrad" cx="35%" cy="30%" r="75%">
+                <stop offset="0" stop-color="#FFB060"/>
+                <stop offset=".55" stop-color="#F2801F"/>
+                <stop offset="1" stop-color="#B9520B"/>
+              </radialGradient>
+              <linearGradient id="glass" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#ffffff" stop-opacity=".22"/>
+                <stop offset="1" stop-color="#ffffff" stop-opacity=".06"/>
+              </linearGradient>
+            </defs>
+
+            <!-- pole + arm -->
+            <rect x="548" y="190" width="18" height="510" fill="#2A3166"/>
+            <rect x="520" y="200" width="40" height="12" fill="#2A3166"/>
+            <!-- backboard -->
+            <rect x="380" y="90" width="190" height="130" rx="1" fill="url(#glass)" stroke="#FBF6EE" stroke-width="5"/>
+            <rect x="440" y="150" width="70" height="52" fill="none" stroke="#F2801F" stroke-width="4"/>
+            <!-- rim back -->
+            <ellipse cx="470" cy="250" rx="46" ry="9" fill="none" stroke="#C2410C" stroke-width="5"/>
+            <rect x="466" y="212" width="8" height="38" fill="#C2410C"/>
+
+            <!-- shadow -->
+            <ellipse id="ballShadow" cx="80" cy="664" rx="28" ry="6" fill="#000" opacity=".28"/>
+
+            <!-- ball -->
+            <g id="ball" transform="translate(80 620)">
+              <g id="ballSpin">
+                <circle r="26" fill="url(#ballGrad)"/>
+                <g fill="none" stroke="#3B1A06" stroke-width="2.2" stroke-linecap="round">
+                  <path d="M-26 0h52M0 -26v52"/>
+                  <path d="M-18 -18c8 8 8 28 0 36M18 -18c-8 8 -8 28 0 36"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- net (in front of ball) -->
+            <g id="net" class="net">
+              <path d="M424 252 L436 322 M440 256 L448 326 M456 258 L460 328 M470 259 L470 330 M484 258 L480 328 M500 256 L492 326 M516 252 L504 322"
+                    stroke="#FBF6EE" stroke-width="2" fill="none" opacity=".9"/>
+              <path d="M428 270 Q470 286 512 270 M432 290 Q470 304 508 290 M436 310 Q470 322 504 310"
+                    stroke="#FBF6EE" stroke-width="2" fill="none" opacity=".75"/>
+            </g>
+            <!-- rim front -->
+            <path d="M424 250 Q470 268 516 250" fill="none" stroke="#F2601F" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+
+          <button class="btn btn--chalk shoot" id="shootBtn" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2v20M5 5c4 4 4 10 0 14M19 5c-4 4-4 10 0 14"/></svg>
+            Take a shot
+          </button>
+        </div>
+      </div>
+
+      <!-- hardwood floor -->
+      <div class="floor" aria-hidden="true">
+        <div class="floor__plane">
+          <svg viewBox="0 0 1600 600" preserveAspectRatio="none">
+            <g fill="none" stroke="#FBF6EE" stroke-width="6" opacity=".85">
+              <line x1="0" y1="10" x2="1600" y2="10"/>
+              <circle cx="800" cy="10" r="150"/>
+              <circle cx="800" cy="10" r="50" fill="#F2801F" fill-opacity=".55"/>
+              <path d="M180 600 V420 a240 240 0 0 1 480 0 V600" />
+              <path d="M940 600 V420 a240 240 0 0 1 480 0 V600" />
+            </g>
+            <rect x="300" y="420" width="240" height="180" fill="#13865A" opacity=".55"/>
+            <rect x="1060" y="420" width="240" height="180" fill="#13865A" opacity=".55"/>
+          </svg>
+        </div>
+      </div>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span>Mumbai Monsoon</span><b>●</b><span>Delhi Thunder</span><b>●</b><span>Bengaluru Blaze</span><b>●</b><span>Chennai Tide</span><b>●</b><span>Kolkata Tigers</span><b>●</b><span>Hyderabad Hawks</span><b>●</b><span>Pune Peshwas</span><b>●</b><span>Jaipur Jaguars</span><b>●</b>
+          <span>Mumbai Monsoon</span><b>●</b><span>Delhi Thunder</span><b>●</b><span>Bengaluru Blaze</span><b>●</b><span>Chennai Tide</span><b>●</b><span>Kolkata Tigers</span><b>●</b><span>Hyderabad Hawks</span><b>●</b><span>Pune Peshwas</span><b>●</b><span>Jaipur Jaguars</span><b>●</b>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about" aria-labelledby="aboutTitle">
+      <div class="wrap about__grid">
+        <div class="about__text">
+          <h2 class="h2" id="aboutTitle">Built for the courts of India</h2>
+          <p class="lead">The IBPL started in 2024 with a simple idea: the talent playing on school courts, college gyms and neighbourhood cages across the country deserves a professional stage.</p>
+          <p>Every franchise runs an open trial in its home region, every team keeps at least six homegrown players on its roster, and every game is streamed free. Our players are paid, insured and coached by staff certified to FIBA standards.</p>
+          <ul class="about__facts">
+            <li><strong>8</strong><span>city franchises</span></li>
+            <li><strong>56</strong><span>league games</span></li>
+            <li><strong>₹2.5 Cr</strong><span>prize pool</span></li>
+            <li><strong>1.4 M</strong><span>viewers last final</span></li>
+          </ul>
+        </div>
+        <div class="about__visual" aria-hidden="true">
+          <div class="jersey">
+            <svg viewBox="0 0 300 340">
+              <path d="M80 20 Q150 70 220 20 L290 60 L260 130 L240 120 L240 330 L60 330 L60 120 L40 130 L10 60 Z" fill="#151A3D" stroke="#FBF6EE" stroke-width="4"/>
+              <path d="M80 20 Q150 70 220 20" fill="none" stroke="#F2801F" stroke-width="10"/>
+              <path d="M60 120 L60 330 M240 120 L240 330" stroke="#13865A" stroke-width="10"/>
+              <text x="150" y="150" text-anchor="middle" font-family="Big Shoulders Display" font-weight="800" font-size="34" fill="#FBF6EE">IBPL</text>
+              <text x="150" y="265" text-anchor="middle" font-family="Big Shoulders Display" font-weight="900" font-size="120" fill="#F2801F">26</text>
+            </svg>
+          </div>
+          <blockquote class="about__quote">
+            “I learned the game on a cement court in Ludhiana. Now kids watch me on TV and know they can get here too.”
+            <cite>— Arjun Sandhu, Delhi Thunder, Season 2 MVP</cite>
+          </blockquote>
+        </div>
+      </div>
+      <div class="wrap pillars">
+        <article class="pillar">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20"/><path d="M4 24h40M24 4v40"/></svg>
+          <h3>Homegrown first</h3>
+          <p>Six Indian players on every roster, two of them under 23.</p>
+        </article>
+        <article class="pillar">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40V18l16-10 16 10v22"/><path d="M18 40V28h12v12"/></svg>
+          <h3>Grassroots courts</h3>
+          <p>Each franchise rebuilds two public courts in its city every season.</p>
+        </article>
+        <article class="pillar">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="10" width="36" height="24" rx="2"/><path d="M18 40h12M24 34v6M20 18l8 4-8 4z"/></svg>
+          <h3>Free to watch</h3>
+          <p>Every game streams live with Hindi, English and Tamil commentary.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ TEAMS ============ -->
+    <section class="section teams" id="teams" aria-labelledby="teamsTitle">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 class="h2" id="teamsTitle">The eight franchises</h2>
+          <p>Pick a team to see its arena, head coach and starting five.</p>
+        </div>
+        <div class="teams__grid" id="teamsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ FIXTURES ============ -->
+    <section class="section fixtures" id="fixtures" aria-labelledby="fixturesTitle">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 class="h2" id="fixturesTitle">Season 3 fixtures</h2>
+          <p>All tip-offs are in IST. Times may change for broadcast.</p>
+        </div>
+        <div class="chips" role="tablist" aria-label="Choose matchweek" id="weekTabs"></div>
+        <div class="fixtures__list" id="fixturesList" role="tabpanel"></div>
+      </div>
+    </section>
+
+    <!-- ============ STATISTICS ============ -->
+    <section class="section stats" id="statistics" aria-labelledby="statsTitle">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 class="h2" id="statsTitle">Season 2 in numbers</h2>
+          <p>Final 2025–26 standings and league leaders. The top four, above the dashed line, made the playoffs. Select a column to sort.</p>
+        </div>
+
+        <div class="stats__grid">
+          <div class="standings">
+            <h3 class="h3">Standings</h3>
+            <div class="table-wrap">
+              <table class="table" id="standings">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Team</th>
+                    <th scope="col"><button data-sort="w">W</button></th>
+                    <th scope="col"><button data-sort="l">L</button></th>
+                    <th scope="col"><button data-sort="pct">Win %</button></th>
+                    <th scope="col"><button data-sort="ppg">PPG</button></th>
+                    <th scope="col"><button data-sort="diff">+/−</button></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="leaders">
+            <div class="leaders__head">
+              <h3 class="h3">League leaders</h3>
+              <div class="seg" role="tablist" aria-label="Choose statistic" id="leaderTabs">
+                <button role="tab" aria-selected="true" data-stat="pts">Points</button>
+                <button role="tab" aria-selected="false" data-stat="reb">Rebounds</button>
+                <button role="tab" aria-selected="false" data-stat="ast">Assists</button>
+              </div>
+            </div>
+            <ol class="leaders__list" id="leadersList"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section class="section gallery" id="gallery" aria-labelledby="galleryTitle">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 class="h2" id="galleryTitle">Gallery</h2>
+          <p>Moments from Season 2. Select any picture to view it larger.</p>
+        </div>
+        <div class="gallery__grid" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ REGISTRATIONS ============ -->
+    <section class="section register" id="registrations" aria-labelledby="regTitle">
+      <div class="wrap register__grid">
+        <div class="register__info">
+          <h2 class="h2" id="regTitle">Registrations are open</h2>
+          <p class="lead">Players aged 17 and over can register for regional trials. Clubs and academies can enter a team in the IBPL Development Cup. Registration is free.</p>
+          <ol class="steps">
+            <li><strong>Register</strong><span>Fill in the form by 20 November.</span></li>
+            <li><strong>Regional trials</strong><span>Camps in 8 cities, 23–30 November.</span></li>
+            <li><strong>Draft night</strong><span>Live from Mumbai on 5 December.</span></li>
+            <li><strong>Tip-off</strong><span>Season 3 begins 12 December.</span></li>
+          </ol>
+        </div>
+
+        <div class="form-card">
+          <div class="seg seg--light" role="tablist" aria-label="Registration type" id="regTabs">
+            <button role="tab" aria-selected="true" aria-controls="playerForm" id="tabPlayer">Player</button>
+            <button role="tab" aria-selected="false" aria-controls="teamForm" id="tabTeam">Team</button>
+          </div>
+
+          <form class="form" id="playerForm" role="tabpanel" aria-labelledby="tabPlayer" novalidate>
+            <div class="row row--3">
+              <div class="field">
+                <label for="pName">Full name</label>
+                <input id="pName" name="name" autocomplete="name" required>
+                <small class="err">Enter your full name.</small>
+              </div>
+              <div class="field">
+                <label for="pDob">Date of birth</label>
+                <input id="pDob" name="dob" type="date" required>
+                <small class="err">Players must be 17 or older.</small>
+              </div>
+              <div class="field">
+                <label for="pHeight">Height in cm</label>
+                <input id="pHeight" name="height" type="number" min="140" max="240" inputmode="numeric" required>
+                <small class="err">Enter a height between 140 and 240 cm.</small>
+              </div>
+            </div>
+            <fieldset class="field">
+              <legend>Position</legend>
+              <div class="positions">
+                <label><input type="radio" name="pos" value="PG" required><span>PG</span></label>
+                <label><input type="radio" name="pos" value="SG"><span>SG</span></label>
+                <label><input type="radio" name="pos" value="SF"><span>SF</span></label>
+                <label><input type="radio" name="pos" value="PF"><span>PF</span></label>
+                <label><input type="radio" name="pos" value="C"><span>C</span></label>
+              </div>
+              <small class="err">Choose the position you play most.</small>
+            </fieldset>
+            <div class="row">
+              <div class="field">
+                <label for="pCity">Trial city</label>
+                <select id="pCity" name="city" required>
+                  <option value="">Select a city</option>
+                  <option>Mumbai</option><option>Delhi</option><option>Bengaluru</option><option>Chennai</option>
+                  <option>Kolkata</option><option>Hyderabad</option><option>Pune</option><option>Jaipur</option>
+                </select>
+                <small class="err">Choose where you'd like to trial.</small>
+              </div>
+              <div class="field">
+                <label for="pLevel">Highest level played</label>
+                <select id="pLevel" name="level" required>
+                  <option value="">Select a level</option>
+                  <option>School</option><option>University</option><option>State</option><option>National</option><option>Professional</option>
+                </select>
+                <small class="err">Choose your highest level.</small>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="pEmail">Email</label>
+                <input id="pEmail" name="email" type="email" autocomplete="email" required>
+                <small class="err">Enter an email like name@example.com.</small>
+              </div>
+              <div class="field">
+                <label for="pPhone">Mobile number</label>
+                <input id="pPhone" name="phone" type="tel" autocomplete="tel" required>
+                <small class="err">Enter a 10-digit mobile number.</small>
+              </div>
+            </div>
+            <button type="submit" class="btn btn--ball btn--lg btn--block">Register for trials</button>
+          </form>
+
+          <form class="form" id="teamForm" role="tabpanel" aria-labelledby="tabTeam" novalidate hidden>
+            <div class="field">
+              <label for="tName">Team or club name</label>
+              <input id="tName" name="team" required>
+              <small class="err">Enter your team's name.</small>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="tCity">City</label>
+                <input id="tCity" name="city" autocomplete="address-level2" required>
+                <small class="err">Enter your team's home city.</small>
+              </div>
+              <div class="field">
+                <label for="tSize">Squad size</label>
+                <input id="tSize" name="size" type="number" min="8" max="15" inputmode="numeric" required>
+                <small class="err">Squads need 8 to 15 players.</small>
+              </div>
+            </div>
+            <div class="field">
+              <label for="tCaptain">Manager or captain name</label>
+              <input id="tCaptain" name="captain" autocomplete="name" required>
+              <small class="err">Enter a contact name.</small>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="tEmail">Email</label>
+                <input id="tEmail" name="email" type="email" autocomplete="email" required>
+                <small class="err">Enter an email like name@example.com.</small>
+              </div>
+              <div class="field">
+                <label for="tPhone">Mobile number</label>
+                <input id="tPhone" name="phone" type="tel" autocomplete="tel" required>
+                <small class="err">Enter a 10-digit mobile number.</small>
+              </div>
+            </div>
+            <button type="submit" class="btn btn--ball btn--lg btn--block">Enter team</button>
+          </form>
+
+          <div class="form-success" id="regSuccess" hidden tabindex="-1">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M19 33l9 9 17-19"/></svg>
+            <h3 id="regSuccessTitle">You're registered</h3>
+            <p id="regSuccessText"></p>
+            <button type="button" class="btn btn--ghost-dark" id="regAgain">Register someone else</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact" aria-labelledby="contactTitle">
+      <div class="wrap contact__grid">
+        <div>
+          <h2 class="h2" id="contactTitle">Contact us</h2>
+          <p class="lead">Questions about tickets, trials, sponsorship or media? Send us a message and the right person will reply within two working days.</p>
+          <dl class="contact__list">
+            <div><dt>Email</dt><dd><a href="mailto:hello@ibpl.in">hello@ibpl.in</a></dd></div>
+            <div><dt>Phone</dt><dd><a href="tel:+912240001234">+91 22 4000 1234</a></dd></div>
+            <div><dt>League office</dt><dd>4th Floor, Court House, Lower Parel, Mumbai 400013</dd></div>
+            <div><dt>Hours</dt><dd>Mon–Sat, 10:00–18:00 IST</dd></div>
+          </dl>
+          <div class="socials">
+            <a href="#" aria-label="IBPL on Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+            <a href="#" aria-label="IBPL on YouTube"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg></a>
+            <a href="#" aria-label="IBPL on X"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+          </div>
+        </div>
+
+        <form class="form form-card form-card--dark" id="contactForm" novalidate>
+          <div class="row">
+            <div class="field">
+              <label for="cName">Name</label>
+              <input id="cName" name="name" autocomplete="name" required>
+              <small class="err">Enter your name.</small>
+            </div>
+            <div class="field">
+              <label for="cEmail">Email</label>
+              <input id="cEmail" name="email" type="email" autocomplete="email" required>
+              <small class="err">Enter an email like name@example.com.</small>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cTopic">Topic</label>
+            <select id="cTopic" name="topic" required>
+              <option value="">Choose a topic</option>
+              <option>Tickets</option><option>Trials and registration</option><option>Sponsorship</option><option>Media and press</option><option>Something else</option>
+            </select>
+            <small class="err">Choose a topic so we can route your message.</small>
+          </div>
+          <div class="field">
+            <label for="cMsg">Message</label>
+            <textarea id="cMsg" name="message" rows="5" minlength="10" required></textarea>
+            <small class="err">Write at least 10 characters.</small>
+          </div>
+          <button type="submit" class="btn btn--ball btn--lg btn--block">Send message</button>
+          <p class="form-note" id="contactNote" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <a class="brand" href="#top">
+        <svg class="brand__ball" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" /><path d="M3 32h58M32 3v58M12 11c11 10 11 32 0 42M52 11c-11 10-11 32 0 42"/></svg>
+        <span class="brand__text">Indian Basketball Pro League</span>
+      </a>
+      <ul class="footer__links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#fixtures">Fixtures</a></li>
+        <li><a href="#registrations">Registrations</a></li>
+        <li><a href="#contact">Contact us</a></li>
+      </ul>
+      <p class="footer__copy">© 2026 Indian Basketball Pro League. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- dialogs -->
+  <dialog class="modal" id="teamModal" aria-labelledby="teamModalTitle">
+    <button class="modal__close" data-close aria-label="Close">×</button>
+    <div id="teamModalBody"></div>
+  </dialog>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Gallery viewer">
+    <button class="modal__close" data-close aria-label="Close">×</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous picture">‹</button>
+    <figure class="lightbox__fig">
+      <div class="lightbox__art" id="lbArt"></div>
+      <figcaption id="lbCap"></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next picture">›</button>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>

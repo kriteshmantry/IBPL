@@ -1,0 +1,4 @@
+# local editor / Claude preview settings
+.claude/
+.DS_Store
+Thumbs.db
